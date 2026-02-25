@@ -3,45 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMEXCA Obsidian Shop</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body class="dark-theme">
-    <header>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#products">Products</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
-    <main>
-        <section id="products">
-            <h1>Welcome to AMEXCA Obsidian Shop</h1>
-            <div class="product-grid">
-                <div class="product-item">
-                    <img src="product1.jpg" alt="Product 1">
-                    <h2>Product 1</h2>
-                    <p>$19.99</p>
-                </div>
-                <div class="product-item">
-                    <img src="product2.jpg" alt="Product 2">
-                    <h2>Product 2</h2>
-                    <p>$29.99</p>
-                </div>
-                <!-- Add more products as needed -->
-            </div>
-            <div class="mockup-container">
-                <img src="mockup.jpg" alt="Interactive Mockup">
-            </div>
-        </section>
-    </main>
+    <title>AMEXCA | Obsidian Shop</title>
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            -webkit-tap-highlight-color: transparent;
+            overflow: hidden;
+        }
+        
+        .editorial-text {
+            letter-spacing: -0.05em;
+            line-height: 0.85;
+        }
 
-    <div class="ticker">
-        <marquee>Welcome to our shop! Check out our latest products!</marquee>
+        /* Seamless Ticker Logic */
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        @keyframes scroll-right {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        .animate-scroll-left {
+            display: flex;
+            width: max-content;
+            animation: scroll-left 35s linear infinite;
+        }
+
+        .animate-scroll-right {
+            display: flex;
+            width: max-content;
+            animation: scroll-right 45s linear infinite;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .view {
+            display: none;
+            height: 100vh;
+            overflow-y: auto;
+            padding-bottom: 200px; /* Space for dual tickers and nav */
+        }
+        .view.active { display: block; }
+
+        .ticker-container {
+            position: fixed;
+            bottom: 64px;
+            width: 100%;
+            z-index: 40;
+            background: black;
+        }
+
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .product-card:active { transform: scale(0.96); }
+
+        /* Custom Scrollbar */
+        .view::-webkit-scrollbar { width: 4px; }
+        .view::-webkit-scrollbar-track { background: transparent; }
+        .view::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- HOME / HERO VIEW -->
+    <section id="view-home" class="view active">
+        <div class="relative min-h-[95vh] flex flex-col items-center justify-center p-6 text-center">
+            <div class="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center grayscale"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black"></div>
+            
+            <div class="relative z-10 mt-12">
+                <p class="text-[10px] font-bold uppercase tracking-[0.8em] text-white/50 mb-6">Unified Host Initiative • 2026</p>
+                <h1 class="editorial-text text-7xl font-black uppercase mb-10">THE GOAL<br>IS THE GAME</h1>
+            </div>
+
+            <div class="relative z-10 w-full max-w-sm aspect-square glass rounded-[40px] flex flex-col items-center justify-center p-8 mt-4 shadow-2xl border border-white/10">
+                <div id="mockup-container" class="w-full h-full flex items-center justify-center">
+                    <svg viewBox="0 0 500 500" class="w-full h-full drop-shadow-[0_20px_60px_rgba(255,255,255,0.15)]">
+                        <path id="shirt-path" d="M120 100 C120 80 180 70 250 70 C320 70 380 80 380 100 L470 180 L420 230 L370 200 L370 470 L130 470 L130 200 L80 230 L30 180 Z" fill="#111" stroke="#333" stroke-width="2"/>
+                        <g id="mockup-front">
+                            <circle cx="250" cy="220" r="45" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>
+                            <text x="250" y="225" font-size="11" font-weight="900" text-anchor="middle" fill="white" style="letter-spacing: 3px">AMEXCA</text>
+                        </g>
+                        <g id="mockup-back" style="display: none;">
+                            <text x="250" y="240" font-size="34" font-weight="900" text-anchor="middle" fill="white">THE GOAL</text>
+                            <text x="250" y="280" font-size="34" font-weight="900" text-anchor="middle" fill="white">IS THE</text>
+                            <text x="250" y="320" font-size="34" font-weight="900" text-anchor="middle" fill="white">GAME</text>
+                        </g>
+                    </svg>
+                </div>
+                <div class="flex gap-8 mt-8">
+                    <button onclick="toggleMockup('front')" class="text-[10px] font-bold uppercase tracking-[0.3em] border-b-2 border-white pb-2 transition-all" id="btn-front">Front</button>
+                    <button onclick="toggleMockup('back')" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 pb-2 transition-all" id="btn-back">Back</button>
+                </div>
+            </div>
+            <button onclick="showView('shop')" class="relative z-10 mt-14 bg-white text-black font-black text-[11px] uppercase tracking-[0.5em] px-14 py-5 rounded-full shadow-xl active:scale-95 transition-transform">Enter Armoury</button>
+        </div>
+    </section>
+
+    <!-- SHOP VIEW -->
+    <section id="view-shop" class="view px-6 pt-28">
+        <header class="mb-14">
+            <p class="text-[11px] font-bold uppercase tracking-[0.5em] text-white/30 mb-3">Drop 01 // Obsidian</p>
+            <h2 class="text-6xl font-black uppercase tracking-tighter leading-none">The Night<br>Pitch</h2>
+        </header>
+
+        <!-- Product Grid -->
+        <div id="shop-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-20">
+            <!-- Items rendered via JS -->
+        </div>
+    </section>
+
+    <!-- INFO VIEW -->
+    <section id="view-info" class="view px-8 pt-28">
+        <h2 class="text-4xl font-black uppercase tracking-tighter mb-10 italic">Continental<br>Heritage</h2>
+        <div class="space-y-8 text-sm text-white/50 leading-relaxed uppercase tracking-widest">
+            <p>AMEXCA is the official technical partner for the 2026 Unified Continental Initiative.</p>
+            <p>Engineering culture across Toronto, CDMX, and Los Angeles. We believe the street is the world's most elite pitch.</p>
+            <div class="p-8 glass rounded-[32px] border border-white/10">
+                <h4 class="text-white font-black uppercase mb-3 tracking-widest">48 Nations • One Street</h4>
+                <p class="text-[11px] leading-relaxed">Providing a stage for the global game within the urban landscape. Unite the Game.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUPPORT VIEW -->
+    <section id="view-support" class="view px-8 pt-28">
+        <h2 class="text-4xl font-black uppercase tracking-tighter mb-10">Logistics</h2>
+        <div class="space-y-5 mb-14">
+            <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-white/30">Inquiry Submission</p>
+            <input type="text" placeholder="OPERATOR NAME" class="w-full p-5 rounded-2xl text-[10px] font-bold uppercase tracking-[0.3em] outline-none bg-white/5 border border-white/10 focus:border-white transition-colors">
+            <textarea placeholder="MISSION DETAILS" rows="4" class="w-full p-5 rounded-2xl text-[10px] font-bold uppercase tracking-[0.3em] outline-none bg-white/5 border border-white/10 focus:border-white transition-colors"></textarea>
+            <button class="w-full bg-white text-black font-black uppercase py-5 rounded-2xl text-[11px] tracking-[0.5em] shadow-lg">Transmit</button>
+        </div>
+    </section>
+
+    <!-- SETTINGS VIEW -->
+    <section id="view-settings" class="view px-8 pt-28">
+        <h2 class="text-4xl font-black uppercase tracking-tighter mb-10">Setup</h2>
+        <div class="space-y-4">
+            <div class="flex justify-between items-center p-6 glass rounded-[24px] border border-white/10">
+                <div>
+                    <span class="text-[11px] font-black uppercase block mb-1">Drop Notifications</span>
+                    <span class="text-[9px] font-bold uppercase text-white/30 tracking-widest">Alerts for limited kits</span>
+                </div>
+                <div class="w-12 h-7 bg-green-600 rounded-full p-1 shadow-inner cursor-pointer"><div class="w-5 h-5 bg-white rounded-full translate-x-5 transition-transform shadow-md"></div></div>
+            </div>
+            <button class="w-full border border-white/10 py-6 rounded-[24px] text-[11px] font-black uppercase tracking-[0.4em] text-red-500 bg-white/5">Deactivate Session</button>
+        </div>
+    </section>
+
+    <!-- TICKERS (SEAMLESS INFINITE LOOP) -->
+    <div class="ticker-container border-t border-white/10">
+        <!-- Ticker 1: Reverse Dates/Cities -->
+        <div class="bg-black py-2.5 overflow-hidden border-b border-white/5">
+            <div class="animate-scroll-right text-[9px] font-bold text-white/20 uppercase tracking-[0.5em]">
+                <span class="px-8">JUNE 11 - JULY 19, 2026 • MEXICO CITY, MEX • TORONTO, CAN • LOS ANGELES, USA • NEW YORK NJ, USA • </span>
+                <span class="px-8">JUNE 11 - JULY 19, 2026 • MEXICO CITY, MEX • TORONTO, CAN • LOS ANGELES, USA • NEW YORK NJ, USA • </span>
+            </div>
+        </div>
+        <!-- Ticker 2: Global Nations -->
+        <div class="bg-black py-4.5 overflow-hidden">
+            <div class="animate-scroll-left text-[10px] font-black text-white uppercase tracking-[0.6em]">
+                <span class="px-8">USA / MEXICO / CANADA / BRAZIL / ARGENTINA / JAPAN / GERMANY / FRANCE / SENEGAL / MOROCCO / </span>
+                <span class="px-8">USA / MEXICO / CANADA / BRAZIL / ARGENTINA / JAPAN / GERMANY / FRANCE / SENEGAL / MOROCCO / </span>
+            </div>
+        </div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 AMEXCA Obsidian Shop</p>
-    </footer>
+    <!-- BOTTOM TAB NAVIGATION -->
+    <nav class="fixed bottom-0 w-full h-16 bg-black border-t border-white/10 flex items-center justify-around z-50 px-4">
+        <button onclick="showView('home')" id="nav-home" class="flex flex-col items-center text-white transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            <span class="text-[8px] font-black uppercase mt-1.5 tracking-widest">Drop</span>
+        </button>
+        <button onclick="showView('shop')" id="nav-shop" class="flex flex-col items-center text-white/40 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span class="text-[8px] font-black uppercase mt-1.5 tracking-widest">Shop</span>
+        </button>
+        <button onclick="showView('info')" id="nav-info" class="flex flex-col items-center text-white/40 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span class="text-[8px] font-black uppercase mt-1.5 tracking-widest">Info</span>
+        </button>
+        <button onclick="showView('settings')" id="nav-settings" class="flex flex-col items-center text-white/40 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span class="text-[8px] font-black uppercase mt-1.5 tracking-widest">Setup</span>
+        </button>
+    </nav>
+
+    <script>
+        // OFFICIAL AMEXCA SHOP PRODUCTS
+        const products = [
+            { id: 1, name: "AMEXCA PRO KIT // 01", price: "$145", type: "AERO-WEAVE™ PERFORMANCE ARBITER" },
+            { id: 2, name: "MATCH DAY FEDERATION JERSEY", price: "$125", type: "UNIFIED 48-NATION SPECIFICATION" },
+            { id: 3, name: "PITCH-SIDE COMPRESSION LAYER", price: "$85", type: "THERMAL REGULATED SUB-BASE" },
+            { id: 4, name: "HERITAGE UTILITY HOODIE", price: "$110", type: "500 GSM OBSIDIAN HEAVY-WEIGHT FLEECE" },
+            { id: 5, name: "STREET PITCH GRAPHIC TEE", price: "$55", type: "48 NATIONS UNIFIED LOGISTICS" },
+            { id: 6, name: "AERO-SHELL TECH PARKA", price: "$280", type: "CLIMATE PROTECTION // STADIUM-SPEC" },
+            { id: 7, name: "NIGHT PITCH BEANIE", price: "$45", type: "REFLECTIVE OBSIDIAN KNIT" },
+            { id: 8, name: "UNIFIED NATIONS SCARF", price: "$35", type: "TRADITIONAL JACQUARD // MATCH HERITAGE" },
+            { id: 9, name: "STADIUM CARGO PANT", price: "$165", type: "REINFORCED NYLON // ALL-WEATHER" }
+        ];
+
+        function renderShop() {
+            const grid = document.getElementById('shop-grid');
+            grid.innerHTML = products.map(p => `
+                <div class="product-card glass p-6 rounded-[32px] flex flex-col border border-white/10 group">
+                    <div class="aspect-[4/5] bg-white/5 rounded-[24px] flex items-center justify-center mb-6 relative overflow-hidden">
+                        <svg class="w-16 h-16 text-white/10 group-hover:scale-110 transition-transform duration-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        <div class="absolute top-4 right-4 bg-white/10 text-[7px] font-black uppercase px-2 py-1 rounded-sm">2026 SPEC</div>
+                    </div>
+                    <p class="text-[9px] font-bold text-white/30 uppercase mb-2 tracking-[0.2em]">${p.type}</p>
+                    <h4 class="text-[12px] font-black uppercase mb-2 leading-tight tracking-wider">${p.name}</h4>
+                    <p class="text-[13px] font-black text-white/80 italic">${p.price}</p>
+                    <button class="mt-5 bg-white text-black text-[10px] font-black uppercase py-3.5 rounded-xl hover:bg-gray-200 transition-colors">Acquire Piece</button>
+                </div>
+            `).join('');
+        }
+
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            const targetView = document.getElementById('view-' + viewId);
+            if(targetView) targetView.classList.add('active');
+            
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.classList.add('text-white/40');
+                btn.classList.remove('text-white');
+            });
+            const activeNav = document.getElementById('nav-' + viewId);
+            if(activeNav) {
+                activeNav.classList.add('text-white');
+                activeNav.classList.remove('text-white/40');
+            }
+            if(viewId === 'shop') renderShop();
+            
+            // Scroll to top when switching views
+            if(targetView) targetView.scrollTo(0,0);
+        }
+
+        function toggleMockup(view) {
+            const front = document.getElementById('mockup-front');
+            const back = document.getElementById('mockup-back');
+            const btnFront = document.getElementById('btn-front');
+            const btnBack = document.getElementById('btn-back');
+            if (view === 'front') {
+                front.style.display = 'block'; back.style.display = 'none';
+                btnFront.classList.add('border-b-2', 'border-white'); btnFront.classList.remove('text-white/30');
+                btnBack.classList.add('text-white/30'); btnBack.classList.remove('border-b-2', 'border-white');
+            } else {
+                front.style.display = 'none'; back.style.display = 'block';
+                btnBack.classList.add('border-b-2', 'border-white'); btnBack.classList.remove('text-white/30');
+                btnFront.classList.add('text-white/30'); btnFront.classList.remove('border-b-2', 'border-white');
+            }
+        }
+
+        window.onload = () => {
+            renderShop();
+            console.log("AMEXCA Armoury Initialized.");
+        };
+    </script>
 </body>
 </html>
